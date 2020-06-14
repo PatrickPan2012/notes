@@ -1,0 +1,63 @@
+/*plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+
+    // Apply the application plugin to add support for building an application
+    id 'application'
+}*/
+
+println("=== The 'this' is ${this.class}")
+/*this.properties.each{
+	println "$it.key: $it.value"
+}*/
+println()
+
+project.apply plugin:'java'
+apply plugin:'application'
+
+project.repositories {
+	println("=== repositories")
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+	
+	println("=== The 'delegate' is ${delegate}")
+	println("=== The 'this' is ${this.class}")
+	println("=== The 'owner' is ${owner}")
+	println()
+}
+
+this.dependencies {
+    // This dependency is found on compile classpath of this component and consumers.
+    implementation 'com.google.guava:guava:26.0-jre'
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+	
+	println("=== dependencies")
+	println("=== The 'delegate' is ${delegate}")
+	println("=== The 'this' is ${this.class}")
+	println("=== The 'owner' is ${owner}")
+	println()
+}
+
+// Define the main class for the application
+mainClassName = 'test.App'
+
+
+println("=== The 'this' is ${this.class}")
+println()
+
+task hello {
+	println("=== hello")
+	println("=== The 'delegate' is ${delegate}")
+	println("=== The 'this' is ${this.class}")
+	println("=== The 'owner' is ${owner}")
+	println("=== The 'resolveStrategy' is 'OWNER_ONLY': ${resolveStrategy==Closure.OWNER_ONLY}")
+	println()
+	
+	/*properties.each{
+		println "$it.key: $it.value"
+	}
+	println()*/
+}

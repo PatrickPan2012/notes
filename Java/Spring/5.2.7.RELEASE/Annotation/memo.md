@@ -1,0 +1,3 @@
+﻿# Spring Annotation
+  - **@Repository** is used to indicate that an annotated class is a "Repository". A class thus annotated is eligible for Spring *DataAccessException* translation.
+  - **@Transactional** is used to describe a transaction attribute on an individual method or on a class. At the class level, this annotation applies as a default to all methods of the declaring class and its subclasses. Note that it does not apply to ancestor classes up the class hierarchy; methods need to be locally redeclared in order to participate in a subclass-level annotation. Transaction rollback occurs on *RuntimeException* and *Error* but not on checked exceptions.

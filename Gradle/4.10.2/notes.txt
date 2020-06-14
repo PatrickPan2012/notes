@@ -1,0 +1,16 @@
+# Changing the Gradle User Home Directory
+export GRADLE_USER_HOME=/opt/gradle/.gradle
+
+# Listing all tasks
+gradle tasks --all
+
+# Listing project dependencies
+gradle dependencies
+gradle dependencies --configuration [configurationName]
+gradle dependencyInsight --dependency [group or artifact name] --configuration [configurationName]
+gradle buildEnvironment
+
+# Display all properties
+Object.properties.each{
+	println "$it.key: $it.value"
+}

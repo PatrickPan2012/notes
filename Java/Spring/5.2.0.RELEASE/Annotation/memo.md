@@ -1,0 +1,3 @@
+# Spring Annotation
+  - **@Import** is used to indicate one or more component classes to import — typically **@Configuration** classes. Provides functionality equivalent to the <import/> element in Spring XML.
+  - **@ImportResource** is used to indicate one or more resources containing bean definitions to import. It is typically used when designing **@Configuration** classes to be bootstrapped by an *AnnotationConfigApplicationContext*, but where some XML functionality such as namespaces is still necessary.

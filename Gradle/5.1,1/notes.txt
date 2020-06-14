@@ -1,0 +1,2 @@
+# Debugging build logic
+gradle -Dorg.gradle.debug=true --no-daemon [task name]

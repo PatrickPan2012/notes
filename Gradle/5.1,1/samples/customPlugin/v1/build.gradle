@@ -1,0 +1,43 @@
+plugins {
+    id 'groovy'
+	id 'eclipse'
+	id 'maven-publish'
+}
+
+repositories {
+	maven{
+		name='myNexus'
+		url='http://localhost:8081/repository/maven-public/'
+	}
+	
+    jcenter()
+}
+
+dependencies {
+	implementation gradleApi()
+	implementation localGroovy()
+	testImplementation 'junit:junit:4.12'
+}
+
+publishing{
+	publications{
+		myGradlePlugin(MavenPublication){
+			group='com.patrick.sample'
+			artifactId='gradle-plugin-sample'
+			version='1.0.0-SNAPSHOT'
+			
+			from components.java
+		}
+	}
+	
+	repositories{
+		maven{
+			name='myNexus'
+			url='http://localhost:8081/repository/maven-snapshots/'
+			credentials{
+				username='admin'
+				password='admin123'
+			}
+		}
+	}
+}

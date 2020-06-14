@@ -1,0 +1,36 @@
+/**
+ * Mapping extension properties to task properties
+ */
+
+class GreetingPluginExtension{
+	final Property<String> message
+	
+	GreetingPluginExtension(Project project){
+		message=project.objects.property(String)
+		message.set('Hello from Patrick')
+	}
+}
+
+class Greeting extends DefaultTask{
+	final Property<String> message=project.objects.property(String)
+	
+	@TaskAction
+	void printMessage(){
+		println message.get()
+	}
+}
+
+class GreetingPlugin implements Plugin<Project>{
+	void apply(Project project){
+		def extension=project.extensions.create('greeting',GreetingPluginExtension,project)
+		project.tasks.create('hello',Greeting){
+			message=extension.message
+		}
+	}
+}
+
+apply plugin: GreetingPlugin
+
+greeting{
+	message='Hi from Patrick'
+}

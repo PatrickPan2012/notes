@@ -1,0 +1,21 @@
+/**
+ * Using a custom plugin in another project
+ */
+
+buildscript{
+	repositories{
+		maven{
+			name='myNexus'
+			url='http://localhost:8081/repository/maven-public/'
+		}
+	}
+	dependencies{
+		classpath 'com.patrick.sample:gradle-plugin-sample:1.0.0-SNAPSHOT'
+	}
+}
+
+apply plugin: 'com.patrick.sample.gradle.plugin.greeting'
+
+greeting{
+	message='Hi from Patrick'
+}

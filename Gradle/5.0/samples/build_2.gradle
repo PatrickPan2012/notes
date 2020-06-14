@@ -1,0 +1,18 @@
+class GreetingTask extends DefaultTask{
+	String greeting='hello from GreetingTask'
+
+	@TaskAction
+	def greet(){
+		println greeting
+	}
+	
+	def f(Closure c){
+		c()
+	}
+}
+
+task greeting(type:GreetingTask){
+	f {
+		greeting = "=== Hello, world! ==="
+	}
+}
