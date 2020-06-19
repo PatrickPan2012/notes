@@ -2,7 +2,10 @@
 FROM jupyterhub/jupyterhub:1.0
 
 MAINTAINER Patrick Pan <patrick.pan2018@gmail.com>
-LABEL date="2020-06-12"
+LABEL date="2020-06-18"
+
+ENV JAVA_HOME /opt/jdk1.8.0_241
+ENV PATH /opt/oracle/instantclient_19_3:$JAVA_HOME/bin:$PATH
 
 # https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html: Oracle Call Interface 19.3 can connect to Oracle Database 11.2 or later.
 COPY instantclient-basic-linux.x64-19.3.0.0.0dbru.zip /opt/oracle/
@@ -115,6 +118,3 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && pip install fuzzymatcher==0.0.5 \
     && sleep 5 \
     && pip install recordlinkage==0.14
-
-ENV JAVA_HOME /opt/jdk1.8.0_241
-ENV PATH /opt/oracle/instantclient_19_3:$JAVA_HOME/bin:$PATH
