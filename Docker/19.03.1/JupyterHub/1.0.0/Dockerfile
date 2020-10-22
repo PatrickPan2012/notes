@@ -2,7 +2,7 @@
 FROM jupyterhub/jupyterhub:1.0
 
 MAINTAINER Patrick Pan <patrick.pan2018@gmail.com>
-LABEL date="2020-06-18"
+LABEL date="2020-10-22"
 
 ENV JAVA_HOME /opt/jdk1.8.0_241
 ENV PATH /opt/oracle/instantclient_19_3:$JAVA_HOME/bin:$PATH
@@ -18,7 +18,7 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse" >> /etc/apt/sources.list \
     && echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse" >> /etc/apt/sources.list \
     && apt-get update \
-    && apt-get install -y vim zip graphviz build-essential \
+    && apt-get install -y vim zip graphviz build-essential python3-dev \
     && cd /opt/oracle \
     && unzip instantclient-basic-linux.x64-19.3.0.0.0dbru.zip \
     && rm -f instantclient-basic-linux.x64-19.3.0.0.0dbru.zip \
@@ -30,7 +30,8 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && echo "[global]" >> ~/.pip/pip.conf \
     && echo "timeout = 60" >> ~/.pip/pip.conf \
     && echo "index-url = https://pypi.tuna.tsinghua.edu.cn/simple" >> ~/.pip/pip.conf \
-    && sleep 5 \
+    && pip install --upgrade pip \
+    && sleep 15 \
     && pip install TensorFlow==2.1.0 \
     && sleep 60 \
     && pip install xgboost==1.0.2 \
@@ -43,7 +44,7 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && sleep 10 \
     && pip install Scipy==1.4.1 \
     && sleep 10 \
-    && pip install jupyter==1.0.0 \
+    && pip install jupyterhub==1.0.0 \
     && sleep 5 \
     && pip install plotly==4.6.0 \
     && sleep 5 \
@@ -117,4 +118,6 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && sleep 5 \
     && pip install fuzzymatcher==0.0.5 \
     && sleep 5 \
-    && pip install recordlinkage==0.14
+    && pip install recordlinkage==0.14 \
+    && sleep 5 \
+    && pip install jupyterlab==2.2.8
