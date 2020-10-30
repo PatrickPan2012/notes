@@ -2,23 +2,20 @@
 FROM jupyterhub/jupyterhub:1.0
 
 MAINTAINER Patrick Pan <patrick.pan2018@gmail.com>
-LABEL date="2020-10-22"
+LABEL date="2020-10-30"
 
-ENV JAVA_HOME /opt/jdk1.8.0_241
-ENV PATH /opt/oracle/instantclient_19_3:$JAVA_HOME/bin:$PATH
+ENV PATH /opt/oracle/instantclient_19_3:$PATH
 
 # https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html: Oracle Call Interface 19.3 can connect to Oracle Database 11.2 or later.
 COPY instantclient-basic-linux.x64-19.3.0.0.0dbru.zip /opt/oracle/
 
-# https://www.oracle.com/java/technologies/javase-jdk8-downloads.html
-ADD jdk-8u241-linux-x64.tar.gz /opt
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse" >> /etc/apt/sources.list \
     && echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse" >> /etc/apt/sources.list \
     && echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse" >> /etc/apt/sources.list \
     && echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse" >> /etc/apt/sources.list \
     && apt-get update \
-    && apt-get install -y vim zip graphviz build-essential python3-dev \
+    && apt-get install -y vim zip graphviz build-essential python3-dev openjdk-8-jdk-headless \
     && cd /opt/oracle \
     && unzip instantclient-basic-linux.x64-19.3.0.0.0dbru.zip \
     && rm -f instantclient-basic-linux.x64-19.3.0.0.0dbru.zip \
